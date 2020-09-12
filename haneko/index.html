@@ -1,0 +1,377 @@
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <title>擠擠臉頰模擬器</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="" />
+    <meta property="og:title" content="擠擠臉頰模擬器" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:width" content="" />
+    <meta property="og:image:height" content="" />
+    <meta property="og:site_name" content="擠擠臉頰模擬器" />
+    <meta property="og:description" content="" />
+    <meta property="twitter:title" content="擠擠臉頰模擬器" />
+    <meta property="twitter:description" content="" />
+    <link rel="stylesheet" type="text/css" href="loadingIcon.css">
+    <!--<link href="favicon.ico" rel="shortcut icon">
+    <link href="favicon.ico" rel="icon">-->
+    <script type="text/javascript" src="data.js"></script>
+    <style>
+    .wrapper
+    {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        transform-origin: 50% 100%;
+        position:relative;
+    }
+    @keyframes move1
+    {
+        0%
+        {
+            animation-timing-function: ease-out;
+        }
+        50% {
+            transform: translate(0%, -50px);
+            animation-timing-function: ease-in;
+        }
+    }
+    @keyframes move2
+    {
+        0%
+        {
+            animation-timing-function: ease-out;
+        }
+        50% {
+            transform: translate(0%, -50px);
+            animation-timing-function: ease-in;
+        }
+    }
+    @keyframes scale1
+    {
+        0%
+        {
+            animation-timing-function: ease-in-out;
+        }
+        20%
+        {
+            transform: scale(1.25,0.8);
+            animation-timing-function: ease-in-out;
+        }
+        50% {
+            transform: scale(0.98,1.2);
+            animation-timing-function: ease-in-out;
+        }
+        80%
+        {
+            transform: scale(1.05,0.9);
+            animation-timing-function: ease-in-out;
+        }
+    }
+    @keyframes scale2
+    {
+        0%
+        {
+            animation-timing-function: ease-in-out;
+        }
+        20%
+        {
+            transform: scale(1.25,0.8);
+            animation-timing-function: ease-in-out;
+        }
+        50% {
+            transform: scale(0.98,1.2);
+            animation-timing-function: ease-in-out;
+        }
+        80%
+        {
+            transform: scale(1.05,0.9);
+            animation-timing-function: ease-in-out;
+        }
+    }
+    @keyframes rotLoop
+    {
+        0%
+        {
+            animation-timing-function: ease-out;
+        }
+        25%
+        {
+            transform: rotate(5deg);
+            animation-timing-function: ease-in-out;
+        }
+        75%
+        {
+            transform: rotate(-5deg);
+            animation-timing-function: ease-in;
+        }
+    }
+    @keyframes fullRotLoop
+    {
+        0%
+        {
+            transform: rotate(360deg);
+            animation-timing-function: linear;
+        }
+        100%
+        {
+            transform: rotate(0deg);
+            animation-timing-function: linear;
+        }
+    }
+    h1 {
+        text-align: center;
+        margin: 0;
+        font-size: 36px; /* Some tweener fallback that doesn't look awful */ 
+        font-size: 25vh;
+        font-size: min(25vh,50vw);
+        padding: 0;
+        color: rgb(184, 184, 184);
+        transition-duration: 0.5s;
+    }
+    h3
+    {
+        margin: 0;
+    }
+    p
+    {
+        margin: 0;
+        margin-top: 5px;
+        margin-bottom: 3px;
+    }
+    body
+    {
+        font-family:"Varela Round","Noto Sans","Microsoft JhengHei","PT Sans Narrow","Source Han Sans TWHK",sans-serif;
+        background-color: rgb(184, 184, 184);
+        transition-duration: 0.5s;
+        margin:0%; width:100%; height: 100%;
+        overflow: hidden;
+    }
+    .wrapper img
+    {
+        width:640px;
+        max-width:80vw;
+        max-height: 80vh;
+        transition-duration:0.25s;
+        opacity:0;
+    }
+    #SwitchBtn
+    {
+        position:absolute; right:20px; bottom: 20px; border-radius: 50%; min-width: 80px; min-height: 80px; width: 10vw; height: 10vw; max-width: 150px; max-height: 150px;
+        background-color: rgb(80, 52, 52);
+        transform: translateY(0);
+        box-shadow: 0 6px rgb(51, 40, 39);
+        transition-duration:0.2s;
+    }
+    #SwitchBtn:hover
+    {
+        transform: translateY(-6px);
+        box-shadow: 0 12px rgb(51, 40, 39);
+    }
+    #SwitchBtn:hover img
+    {
+        animation: fullRotLoop 2400ms infinite;
+    }
+    .dialougeBox
+    {
+        position:fixed; left:50%; top:65%; transform: translate(-50%,0);
+        background-color: rgba(255,255,255,0.6);
+        width: 80%;
+        max-width: 800px;
+        min-height: 3em;
+        max-height: 25%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 10px;
+        border: 5px solid white;
+        transition-duration: 0.5s;
+        opacity: 1;
+        padding: 8px;
+    }
+    .dialougeBox.hidden
+    {
+        transform: translate(-50%,20px);
+        opacity: 0;
+    }
+    </style>
+</head>
+<body id = "Main">
+    <h1 id="Count">000</h1>
+    <div style="position:fixed; margin:0; left:0; top:0;right:0;bottom: 0;"></div>
+    <div style="position:fixed; left:50%;bottom:30%;transform: translate(-50%,0);">
+        <div class="wrapper" id="Rot" onmousedown="PressedCharacter(false);" ontouchstart="PressedCharacter(true);" onmouseup="ReleasedCharacter(false);" ontouchend="ReleasedCharacter(true);">
+            <div class="wrapper" id="Scale">
+                <div class="wrapper" id="Translate">
+                    <img id="image1">
+                    <img id="image2" style="position: absolute;bottom: 0;left: 0;">
+                    <div style="position: absolute;bottom: 0;left: 0;right:0;top:0;">
+                        <div id="LoadIcon" style="position: absolute;top: 50%;left: 50%; transform: translate(-50%,-50%);">
+                        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="db1" class="dialougeBox hidden">
+        <h3 id="db1Name">Name</h3>
+        <p id="db1Content">Hello?</p>
+    </div>
+    <div id="db2" class="dialougeBox hidden">
+        <h3 id="db2Name">Name</h3>
+        <p id="db2Content">Hello?</p>
+    </div>
+    <div id="SwitchBtn" onclick="SwitchDataset();">
+        <img src="RefreshIcon.png" style="width:100%;height: 100%;">
+    	<input type="file" id="myFile" multiple accept="image/*" style="display:none;" onchange="selectFile()">
+    </div>
+    <script>
+    var count = 0;
+    var pressing = false;
+    var UseTouchOnly = false;
+    function ClickedCharacter()
+    {
+        count++;
+        document.getElementById('Count').innerHTML = ('00' + count).slice(-3);
+        if(count%2==0)
+        {
+            document.getElementById('Translate').style = 'animation: move1 300ms 150ms 1;';
+            document.getElementById('Scale').style = 'animation: scale1 600ms 1;';
+        }
+        else
+        {
+            document.getElementById('Translate').style = 'animation: move2 300ms 150ms 1;';
+            document.getElementById('Scale').style = 'animation: scale2 600ms 1;';
+        }
+        RefreshDialouge();
+    }
+    function PressedCharacter(IsTouch)
+    {
+        if(IsTouch) UseTouchOnly = true;
+        pressing = true;
+        document.getElementById('Rot').style = 'animation: rotLoop 400ms infinite;';
+    }
+    function ReleasedCharacter(IsTouch)
+    {
+        document.getElementById('Rot').style = '';
+        if(pressing && (IsTouch||!UseTouchOnly))
+        {
+            pressing = false;
+            ClickedCharacter();
+        }
+    }
+    window.oncontextmenu = function(event) {
+     event.preventDefault();
+     event.stopPropagation();
+     return false;
+    };
+    //init elements
+    function start()
+    {
+        usingImg = 2;
+        img = document.getElementById('image1');
+        img2 = document.getElementById('image2');
+        img.src = '';
+        img2.src = '';
+        var dropArea = document.getElementById('SwitchBtn');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+        ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+        });
+        function preventDefaults (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        }
+        function highlight(e) {
+        dropArea.classList.add('highlight');
+        }
+        function unhighlight(e) {
+        dropArea.classList.remove('highlight');
+        }
+        dropArea.addEventListener('drop', handleDrop, false);
+        db1 = document.getElementById('db1');
+        db2 = document.getElementById('db2');
+        db1Name = document.getElementById('db1Name');
+        db2Name = document.getElementById('db2Name');
+        db1Content = document.getElementById('db1Content');
+        db2Content = document.getElementById('db2Content');
+        usingDialouge = 1;
+        SwitchDataset();
+    }
+    function handleDrop(e) {
+        let dt = e.dataTransfer;
+        let files = dt.files;
+        document.getElementById('myFile').files = files;
+        selectFile();
+        }
+        function selectFile() {
+        var file = document.getElementById('myFile').files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            SetImgSrc(reader.result);
+        };
+        if(file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        }
+        else {
+            img.src = '';
+        }
+    }
+    function SetImgSrc(newsrc)
+    {
+        document.getElementById('LoadIcon').style.visibility = "visible";
+        
+        (usingImg==1?img:img2).src = '';
+        (usingImg==1? img:img2).onload = function()
+        {
+            (usingImg==1? img:img2).style.opacity=1;
+            (usingImg==1? img2:img).style.opacity=0;
+            usingImg = usingImg==1? 2:1;
+            document.getElementById('LoadIcon').style.visibility = "hidden";
+        };
+        
+        (usingImg==1?img:img2).src = newsrc;
+    }
+    
+
+    function RefreshDialouge()
+    {
+        (usingDialouge==1?db1:db2).classList.add('hidden');
+        if(CurDialouge.length>0)
+        {
+            let index = Math.floor(Math.random()*CurDialouge.length);
+            if(CurDialouge[index].length > 0)
+            {
+                usingDialouge = usingDialouge==1?2:1;
+                (usingDialouge==1?db1Name:db2Name).innerHTML = CurName;
+                (usingDialouge==1?db1Content:db2Content).innerHTML = CurDialouge[index];
+                (usingDialouge==1?db1:db2).classList.remove('hidden');
+            }
+        }
+    }
+    window.onload = function(){start();}
+    var CurDataset = -1;
+    var CurDialouge = [];
+    var CurName = "";
+    function SwitchDataset()
+    {
+        CurDataset = Math.floor(Math.random()*PredefinedDataSet.length);
+        //console.log(""+CurDataset);
+        SetImgSrc(PredefinedDataSet[CurDataset]["image"]);
+        document.getElementById('Count').style.color = PredefinedDataSet[CurDataset]["textcolor"];
+        document.getElementById('Main').style.backgroundColor = PredefinedDataSet[CurDataset]["backgroundcolor"];
+        CurDialouge = DefaultDialouge.concat(PredefinedDataSet[CurDataset]["dialouge"]);
+        CurName = PredefinedDataSet[CurDataset]["name"];
+        RefreshDialouge();
+    }
+    </script>
+</body>
