@@ -37,8 +37,8 @@ PredefinedDataSet=
         ],
     },
 	{
-        "name":"你媽（喜拿狗）",
-        "image":"test.png",
+        "name":"地方的貓貓",
+        "image":"meow.png",
         "backgroundcolor":"#c6a255",
         "textcolor":"#d8ac4e",
         "dialouge":
